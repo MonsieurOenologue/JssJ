@@ -1,0 +1,18 @@
+.wrap
+{
+    color : white;
+}
+
+#temps
+{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-family: Montserrat, Roboto, Impact;
+    font-size: 1em;
+}
