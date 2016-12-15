@@ -34,19 +34,15 @@ function initializeClock (id) {
 }
 initializeClock('temps');
 
-//Function displaying a different background depending on the hour of the day
-function displayDayNightBack () {
-    var t = getTime().hours;
-    if(t < 19)//Add toggle day/night button condition too
-    {
-        document.body.style.background = 'grey';
-    }
-    else
-    {
-        document.body.style.background = 'blue';
-    }
+
+function getWeather(){
+    var myWeather = $.simpleWeather({
+      location: 'Montpellier, France',
+      woeid: '',
+      unit: 'c',
+    });
+    return myWeather.temps;
 }
-//displayDayNightBack();
 
 //Function displaying a different background depending on the temperature (may add some conditions)
 function displayDependingWeather () {
@@ -54,25 +50,32 @@ function displayDependingWeather () {
 
     if(actualWeather < 10) //Add toggle day/night button condition too
     {
-        document.body.style.background = 'blue';
+        document.getElementById("background-image").style.WebkitFilter = "contrast(60%)";
     }
     else
     {
-        document.body.style.background = 'yellow';
-    }
-
-    function getWeather(){
-        var myWeather = $.simpleWeather({
-          location: 'Montpellier, France',
-          woeid: '',
-          unit: 'c',
-        });
-        return myWeather.temps;
+        document.getElementById("background-image").style.WebkitFilter = "contrast(120%)";
     }
 }
 displayDependingWeather();
 
+
+//Function displaying a different background depending on the hour of the day
+function displayDayNightBack () {
+    var t = getTime().hours;
+    if(t < 19)//Add toggle day/night button condition too
+    {
+        document.getElementById("background-image").style.WebkitFilter = "blur(5px)";
+    }
+    else
+    {
+        document.getElementById("background-image").style.WebkitFilter = "blur(2px)";
+    }
+}
+displayDayNightBack();
+
 //Weather management
+function displayWeather(){
 $(document).ready(function() {
   $.simpleWeather({
     location: 'Montpellier, France',
@@ -90,15 +93,35 @@ $(document).ready(function() {
       $("#weather").html('<p>'+error+'</p>');
     }
   });
-});
+ });
+}
+
+function getSound() {
+    var actualWeather = getWeather();
+    var audioSun = new Audio('sun.mp3');
+    var audioRain = new Audio('rain.mp3')
+
+    if (actualWeather.currently == "Sunny")
+    {
+        audioSun.play();
+        audioRain.pause()
+    }
+    else if (actualWeather.currently == "Rain")
+    {
+        audioRain.play();
+        audioSun.pause();
+    }
+}
 
 //Functions for the buttons to work
 $(function(){
   $(".sound").on('click', function() {
     if ($(this).attr("class") == "sound") {
       this.src = this.src.replace("soundoff","soundon");
+      getSound();
     } else {
       this.src = this.src.replace("soundon","soundoff");
+      Audio.pause();
     }
     $(this).toggleClass("on");
   });

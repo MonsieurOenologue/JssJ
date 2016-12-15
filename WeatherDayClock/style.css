@@ -1,6 +1,44 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body
+{
+    position : fixed;
+    display: block;
+    width : 100%;
+    height : 100%;
+}
+
+#background-image
+{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    background-image: url("Photo-Montpellier.jpg");
+    width : 100%;
+    height : 100%;
+}
+
 .wrap
 {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin-left: 20px;
+    margin-right: 20px;
     color : white;
+    width : 100%;
+    height : 100%;
 }
 
 #temps
@@ -15,4 +53,9 @@
     margin: auto;
     font-family: Montserrat, Roboto, Impact;
     font-size: 1em;
+}
+
+.buttonbar
+{
+    margin-top : 20px;
 }
